@@ -16,7 +16,7 @@ class IMU{
     private:
       Adafruit_MPU6050 mpu;
       sensors_event_t accel, gy, temp;
-      const float alpha = 0.98;
+      const float alpha = 0.90;
       float filterRoll, filterPitch;
       unsigned long prevTime;
 };
