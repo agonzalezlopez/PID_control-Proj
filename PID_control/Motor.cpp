@@ -4,12 +4,13 @@
 
 volatile long encoderTick = 0;
 
-Motor::Motor(int pin1, int pin2, int encoderPin1, int encoderPin2, int PWMPin){
+Motor::Motor(int pin1, int pin2, int encoderPin1, int encoderPin2, int PWMPin, bool inverted){
   _pin1 = pin1;
   _pin2 = pin2;
   _encoderPin1 = encoderPin1;
   _encoderPin2 = encoderPin2;
   _PWMPin = PWMPin;
+  _inverted = inverted;
 } 
 
 void Motor::begin(){
@@ -41,6 +42,9 @@ int Motor::getDirection(){
 //CAUTION: NEED TO INVERT FOR MIRRORING MOTORS
 // 1 for forward, -1 for reverse
 void Motor::setDirection(int direction){
+  if(_inverted){ 
+    direction = -direction;
+  }
   if(direction == 1){
     //forward
     digitalWrite(_pin1, HIGH);
